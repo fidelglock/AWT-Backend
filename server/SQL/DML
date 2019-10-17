@@ -1,0 +1,96 @@
+CREATE SCHEMA IF NOT EXISTS awt
+
+--Create  sequence "Users_UserID_seq";
+
+
+CREATE TABLE awt."Users"
+(
+    "UserID" integer NOT NULL DEFAULT nextval('"Users_UserID_seq"'::regclass),
+    "UserEmail" character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    "UserPassword" character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    "UserType" integer,
+    "CreatedDate" date,
+    CONSTRAINT "Users_pkey" PRIMARY KEY ("UserID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE awt."Users"
+    OWNER to "ioslpg";
+
+-- Table: public."Students"
+
+
+CREATE TABLE awt."Students"
+(
+    "StudentID" bigint,
+    "StudentName" character varying(50) COLLATE pg_catalog."default",
+    "StudentEmail" character varying(50) COLLATE pg_catalog."default",
+    "CreatedDate" date
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE awt."Students"
+    OWNER to ioslpg;
+
+
+--Table projects
+
+
+CREATE TABLE awt.projects
+(
+    "ProjectId" serial NOT NULL,
+    "Title" character varying(500),
+    "Description" character varying(5000),
+    "CategoryID" integer,
+    "Prereq" character varying(500),
+    "MaxStudent" integer,
+    PRIMARY KEY ("ProjectId")
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE awt.projects
+    OWNER to ioslpg;
+	
+--Table Category
+
+
+
+CREATE TABLE awt."Category"
+(
+    "categoryId" serial NOT NULL,
+    "ShortName" character varying(100),
+    "LongName" character varying(500),
+    PRIMARY KEY ("categoryId")
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE awt."Category"
+    OWNER to ioslpg;
+
+
+
+
+CREATE TABLE awt."StudentProject"
+(
+    "ID" serial NOT NULL,
+    "StudentID" integer,
+    "ProjectID" integer,
+    "Preference" integer,
+    PRIMARY KEY ("ID")
+)
+WITH (
+    OIDS = FALSE
+);
+
+ALTER TABLE awt."StudentProject"
+    OWNER to ioslpg;	

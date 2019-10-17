@@ -1,0 +1,55 @@
+//schema for dbdiagram.io
+
+
+
+ 
+
+TABLE "Users"
+{
+    "UserID" int 
+    "UserEmail" varchar
+    "UserPassword" varchar
+    "UserType" integer,
+    "CreatedDate" date,
+}
+
+
+ TABLE "Students"
+{
+    "StudentID" bigint,
+    "StudentName" varchar
+    "StudentEmail" varchar
+    "CreatedDate" date
+}
+
+
+
+
+TABLE projects
+{
+    "ProjectId" int
+    "Title" varchar
+    "Description" varchar
+    "CategoryID" integer [ref: > Category.categoryId]
+    "Prereq" varchar
+    "MaxStudent" integer,
+    
+}
+
+
+TABLE "Category"
+{
+    "categoryId" int
+    "ShortName" varchar
+    "LongName" varchar
+
+}
+
+TABLE "StudentProject"
+{
+    "ID" integer
+    "StudentID" integer [ref: > Students.StudentID]
+    "ProjectID" integer [ref: > projects.ProjectId]
+    "Preference" integer,
+}
+
